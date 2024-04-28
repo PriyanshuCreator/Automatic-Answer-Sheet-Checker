@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card h2 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #333;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .summary, .feedback, .suggestions, .query {
+            margin-top: 20px;
+        }
+        .summary h2, .feedback h2, .suggestions h2, .query h2 {
+            margin-bottom: 10px;
+        }
+        .summary p, .feedback p, .suggestions p, .query p {
+            margin: 10px 0;
+        }
+        .highlight-green {
+            background-color: lightgreen;
+        }
+        .highlight-red {
+            background-color: lightcoral;
+        }
+        .graph-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .query-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .query-options button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+        }
+        .query-options button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results</h1>
+        {% for result in results %}
+        <div class="card">
+            <h2>Question: {{ result.question }}</h2>
+            <p>Answer: {{ result.answer }}</p>
+            <p>Mark (Out of 5): {{ result.mark }}</p>
+            <p>Topic: {{ result.topic }}</p>
+            {% if result.mark > 2.5 %}
+                <p class="highlight-green">This question received a high mark!</p>
+            {% else %}
+                <p class="highlight-red">This question needs improvement.</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="card">
+            <h2>Questions and Marks</h2>
+            <table>
+                <tr>
+                    <th>Question Number</th>
+                    <th>Marks</th>
+                    <th>Topic</th>
+                </tr>
+                {% for result in results %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td {% if result.mark > 2.5 %} class="highlight-green" {% else %} class="highlight-red" {% endif %}>{{ result.mark }}</td>
+                    <td>{{ result.topic }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="card summary">
+            <h2>Performance Summary</h2>
+            <p>Total Marks Obtained: {{ total_marks }}</p>
+            <p>Total Questions: {{ total_questions }}</p>
+            <p>Overall Percentage: {{ overall_percentage }}%</p>
+        </div>
+        <div class="card feedback">
+            <h2>Feedback</h2>
+            <p>Subjects with marks below 40% require improvement.</p>
+        </div>
+        <div class="card suggestions">
+            <h2>Suggestions</h2>
+            {% for result in results %}
+                {% if (result.mark / 5) * 100 < 40 %}
+                    <p>Subject {{ result.topic }} needs improvement. Focus on this topic for better performance.</p>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="card query">
+            <h2>Query</h2>
+            <p>Do you have any queries regarding the assessment?</p>
+            <div class="query-options">
+                <button onclick="handleQuery('yes')">Yes</button>
+                <button onclick="handleQuery('no')">No</button>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Topic-wise Performance</h2>
+            <div class="graph-container">
+                <canvas id="topicChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        function handleQuery(response) {
+            alert("Query Response: " + response);
+        }
+
+        // Prepare data for the chart
+        var topics = [];
+        var marks = [];
+        {% for result in results %}
+            topics.push("{{ result.topic }}");
+            marks.push({{ result.mark }});
+        {% endfor %}
+
+        // Draw the chart
+        var ctx = document.getElementById('topicChart').getContext('2d');
+        var topicChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: topics,
+                datasets: [{
+                    label: 'Marks',
+                    data: marks,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+</body>
+</html>

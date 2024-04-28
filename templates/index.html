@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Answer Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .toolbar {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+        }
+        .card-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 100px; /* Increased the gap between cards */
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .upload-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <h1>Question Answer Checker</h1>
+    </div>
+    <div class="container">
+        <form action="/submit" method="post">
+            <div class="card-container">
+                <div class="card">
+                    <h2>Upload Question Image</h2>
+                    <img src="{{ url_for('static', filename='quespaper.png') }}" alt="Question Image">
+                    <input type="file" id="question_file" name="question_file">
+                    <label for="question_file" class="upload-btn">Choose File</label>
+                </div>
+                <div class="card">
+                    <h2>Uploaded Answer Sheet</h2>
+                    <img src="{{ url_for('static', filename='anspaper.png') }}" alt="Answer Sheet">
+                    <input type="file" id="answer_file" name="answer_file">
+                    <label for="answer_file" class="upload-btn">Choose File</label>
+                </div>
+            </div>
+            <input type="submit" value="Submit" class="upload-btn">
+        </form>
+    </div>
+</body>
+</html>

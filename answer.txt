@@ -1,0 +1,10 @@
+1. Photosynthesis is a biological process where plants use sunlight to produce energy.
+Importance: It helps plants survive.
+
+2 Explanation: Newton's Third Law states that for every action, there is an equal and opposite reaction. This means that whenever one object exerts a force on a second object, the second object exerts an equal force in the opposite direction on the first object.Everyday Example: When you walk, your feet push against the ground with a certain force. According to Newton's Third Law, the ground pushes back on your feet with an equal force in the opposite direction. This reaction force from the ground propels you forward, allowing you to move.
+
+3. Statement: The law of conservation of energy states that the total energy of an isolated system remains constant over time. Energy cannot be created or destroyed, only transformed from one form to another. Example: Consider a swinging pendulum. As the pendulum swings back and forth, its potential energy (due to its height) is converted into kinetic energy (due to its motion) and vice versa. At any given point, the sum of the pendulum's kinetic and potential energies remains constant, demonstrating the conservation of energy.
+
+4.Explanation: Enzymes are biological catalysts that speed up chemical reactions in living organisms by lowering the activation energy required for the reaction to occur. They do so by binding to specific substrates and facilitating the formation of product molecules.Importance: Enzymes play a crucial role in various biological processes such as digestion, metabolism, and cellular respiration. Without enzymes, many of these reactions would occur too slowly to sustain life.
+
+5. Definition: Electric current is the flow of electric charge through a conductive medium, such as a wire, due to the movement of electrons.Unit of Measurement: Electric current is typically measured in amperes (A), which represents the rate of flow of electric charge past a given point in a circuit. One ampere is equal to one coulomb of charge passing through a point in one second.
